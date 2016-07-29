@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Fragment>
+    <!-- to get to install folder use DirectoryRef instead of Folder -->
+    <DirectoryRef Id="INSTALLFOLDER">
+      <Directory Id="SampleComponentsDirectory"
+                 Name="Sample Components" />
+    </DirectoryRef>
+<!-- Without adding -bf flag to toolset file wouldn't compile into lib -->
+    <ComponentGroup Id="SampleComponentGroup"
+                    Directory="SampleComponentsDirectory">
+      <Component Id="cmpSampleTextFileTXT"
+                 Guid="{5382BC02-4484-4C9B-8734-A99D20632EA9}">
+        <File Source="SampleTextFile.txt" />
+      </Component>
+    </ComponentGroup>
+
+    <Feature Id="SampleFeature">
+      <ComponentGroupRef Id="SampleComponentGroup" />
+    </Feature>
+    
+	</Fragment>
+</Wix>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<Product Id="*" Name="_03_ConsoleAppInstaller" Language="1033" Version="1.0.0.0" Manufacturer="______" UpgradeCode="7d789de5-0780-4d6d-af9d-5452dbbead49">
+	<Product Id="*" Name="_08_FileInstaller" Language="1033" Version="1.0.0.0" Manufacturer="" UpgradeCode="2bb671a6-29f3-43a0-9b53-b577d2b84aa4">
 		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
 
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
-		<MediaTemplate EmbedCab="yes" />
+		<MediaTemplate />
 
-		<Feature Id="ProductFeature" Title="_03_ConsoleAppInstaller" Level="1">
+		<Feature Id="ProductFeature" Title="_08_FileInstaller" Level="1">
 			<ComponentGroupRef Id="ProductComponents" />
 		</Feature>
 	</Product>
@@ -14,17 +14,17 @@
 	<Fragment>
 		<Directory Id="TARGETDIR" Name="SourceDir">
 			<Directory Id="ProgramFilesFolder">
-				<Directory Id="INSTALLFOLDER" Name="_03_ConsoleAppInstaller" />
+				<Directory Id="INSTALLFOLDER" Name="_08_FileInstaller" />
 			</Directory>
 		</Directory>
 	</Fragment>
 
 	<Fragment>
 		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
-      <Component Id="cmpTestApplicationEXE"
-                 Guid="{6E2A6370-4784-4CF3-B42B-AA2D29EA5B1B}">
-        <File Source="$(var.04_TestApplication.TargetDir)04_TestApplication.exe" />
-      </Component>
+			<!-- TODO: Remove the comments around this Component element and the ComponentRef below in order to add resources to this installer. -->
+			<!-- <Component Id="ProductComponent"> -->
+				<!-- TODO: Insert files, registry keys, and other resources here. -->
+			<!-- </Component> -->
 		</ComponentGroup>
 	</Fragment>
 </Wix>

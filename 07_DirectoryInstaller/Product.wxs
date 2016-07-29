@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="*" Name="_07_DirectoryInstaller" Language="1033" Version="1.0.0.0" Manufacturer="__" UpgradeCode="75cef494-4029-4324-8946-0d2aa6270f8b">
+    <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    <MediaTemplate />
+
+    <Feature Id="ProductFeature" Title="_07_DirectoryInstaller" Level="1">
+      <ComponentGroupRef Id="ProductComponents" />
+    </Feature>
+  </Product>
+
+  <Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="MyCompanyFolder" Name="_My_Company">
+          <Directory Id="MySoftwareFolder" Name="My Software">
+            <Directory Id="ConfigFolder" Name="Config" />
+            <Directory Id="ToolsFolder" Name="Tools" />
+            <Directory Id="DocFolder" Name="Documentation" />
+          </Directory>
+        </Directory>
+      </Directory>
+    </Directory>
+  </Fragment>
+
+  <Fragment>
+    <ComponentGroup Id="ProductComponents">
+      <Component Id="cmpCreateConfigFolder"
+                 Guid="{21AC0239-87F9-4D8B-9F73-71665C491150}"
+                 Directory="ConfigFolder">
+        <CreateFolder />
+      </Component>
+      <Component Id="cmpCreateToolsFolder"
+                 Guid="{7B75B591-58B7-41F4-A511-E221E243371C}"
+                 Directory="ToolsFolder">
+        <CreateFolder />
+      </Component>
+      <Component Id="cmpCreateDocFolder"
+                 Guid="{B0BA1D63-110C-4169-9094-64F4103234E8}"
+                 Directory="DocFolder">
+        <CreateFolder />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+</Wix>
