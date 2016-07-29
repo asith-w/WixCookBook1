@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Fragment>
+        <DirectoryRef Id="INSTALLFOLDER" />
+    </Fragment>
+    <Fragment>
+        <ComponentGroup Id="MyComponentGroup">
+            <Component Id="cmpA609F30B9E3AECCDEE4D779C8B7308ED" Directory="INSTALLFOLDER" Guid="{38557BC9-197B-48B8-8B12-4D5AE84E1951}">
+                <File Id="fil314398091041DF4762128892E7C98AA7" KeyPath="yes" Source="$(var.SourceFilesDir)\Sample1.txt" />
+            </Component>
+            <Component Id="cmpFDDD9C14F1879BB98F7C85AD1C280975" Directory="INSTALLFOLDER" Guid="{81F4A1D4-45B8-4414-AFF4-F3632FF326C9}">
+                <File Id="filB6C392508320F3B45A8928D279282132" KeyPath="yes" Source="$(var.SourceFilesDir)\Sample2.txt" />
+            </Component>
+            <Component Id="cmp317E738D401B4037457B1246D79537F8" Directory="INSTALLFOLDER" Guid="{F89CF948-FBA0-4C74-BF6D-64A5813A21F9}">
+                <File Id="filD1E8DEC61E606A6F68627BED2C242EAA" KeyPath="yes" Source="$(var.SourceFilesDir)\Sample3.txt" />
+            </Component>
+        </ComponentGroup>
+    </Fragment>
+</Wix>

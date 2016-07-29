@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="*" Name="_10_ConditionalComponentsInstaller" Language="1033" Version="1.0.0.0" Manufacturer="_" UpgradeCode="6b405acd-828d-40ad-be19-c19361ba58e2">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate />
+
+		<Feature Id="ProductFeature" Title="_10_ConditionalComponentsInstaller" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+		</Feature>
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="INSTALLFOLDER" Name="_10_ConditionalComponentsInstaller" />
+			</Directory>
+		</Directory>
+	</Fragment>
+
+	<Fragment>
+    <ComponentGroup Id="ProductComponents"
+                    Directory="INSTALLFOLDER">
+      
+          <Component Id="cmpWindows7XML"
+                     Guid="{1FDA4A47-B45B-4040-A486-56EDA4B036B8}">
+            <File Source="Windows7.xml" />
+            <Condition>VersionNT = 601</Condition>
+          </Component>
+      
+          <Component Id="cmpWindows8XML"
+                     Guid="{2FF087CE-9483-4456-BF77-FB1F6D700A76}">
+            <File Source="Windows8.xml" />
+            <Condition>VersionNT = 602</Condition>
+          </Component>
+
+          <Component Id="cmpWindows106XML"
+                         Guid="{1FDA4A47-B45B-4040-A486-56EDA4B026B8}">
+            <File Source="Windows10_603.xml" />
+            <Condition>VersionNT = 603</Condition>
+          </Component>
+
+          <Component Id="cmpWindows101XML"
+                     Guid="{2FF087CE-9483-4456-BF77-FB1F6D710A76}">
+            <File Source="Windows10_1000.xml" />
+            <Condition>VersionNT = 1000</Condition>
+          </Component>
+      
+    </ComponentGroup>
+	</Fragment>
+</Wix>

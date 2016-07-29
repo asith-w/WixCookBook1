@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<Product Id="*" Name="_08_FileInstaller" Language="1033" Version="1.0.0.0" Manufacturer="" UpgradeCode="2bb671a6-29f3-43a0-9b53-b577d2b84aa4">
+	<Product Id="*" Name="_09_SixtyFourBitInstaller" Language="1033" Version="1.0.0.0" Manufacturer="_" UpgradeCode="05d5efc2-fd0f-4248-baf7-0a5a4c4773df">
 		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
 
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
 		<MediaTemplate />
 
-		<Feature Id="ProductFeature" Title="_08_FileInstaller" Level="1">
+		<Feature Id="ProductFeature" Title="_09_SixtyFourBitInstaller" Level="1">
 			<ComponentGroupRef Id="ProductComponents" />
 		</Feature>
 	</Product>
 
 	<Fragment>
 		<Directory Id="TARGETDIR" Name="SourceDir">
-			<Directory Id="ProgramFilesFolder">
-				<Directory Id="INSTALLFOLDER" Name="_08_FileInstaller" />
+			<Directory Id="ProgramFiles64Folder">
+				<Directory Id="INSTALLFOLDER" Name="_09_SixtyFourBitInstaller" />
 			</Directory>
 		</Directory>
 	</Fragment>
 
 	<Fragment>
 		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
-      <Component Id="cmpSampleTXT" Guid="{759CE9A8-F4DF-4DE7-B995-E5F0D926BE43}">
-        <File Source="Sample.txt" />
+      <Component Id="cmpConsoleApp64BitsEXE" Guid="{7230A6C1-2920-43A0-B9BA-69E4B0A5450C}">
+        <File Source="$(var.09_ConsoleApp64Bits.TargetDir)09_ConsoleApp64Bits.exe" />
       </Component>
 		</ComponentGroup>
 	</Fragment>

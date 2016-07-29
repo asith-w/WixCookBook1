@@ -4,9 +4,9 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>3.10</ProductVersion>
-    <ProjectGuid>79b27783-cc6e-4a4d-b76f-a7e405765323</ProjectGuid>
+    <ProjectGuid>508bf8ad-a03e-40cb-9fbc-317016c83b30</ProjectGuid>
     <SchemaVersion>2.0</SchemaVersion>
-    <OutputName>_08_FileInstaller</OutputName>
+    <OutputName>_10_ConditionalComponentsInstaller</OutputName>
     <OutputType>Package</OutputType>
     <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' AND '$(MSBuildExtensionsPath32)' != '' ">$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
     <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' ">$(MSBuildExtensionsPath)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
@@ -24,7 +24,10 @@
     <Compile Include="Product.wxs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Sample.txt" />
+    <Content Include="Windows10_1000.xml" />
+    <Content Include="Windows10_603.xml" />
+    <Content Include="Windows7.xml" />
+    <Content Include="Windows8.xml" />
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <!--
