@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="*" Name="_16_DefaultProgramInstaller" Language="1033" Version="1.0.0.0" Manufacturer="_" UpgradeCode="c1ceb84b-a050-4b8f-bf50-5873af4f005e">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate />
+
+		<Feature Id="ProductFeature" Title="_16_DefaultProgramInstaller" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+		</Feature>
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="INSTALLFOLDER" Name="_16_DefaultProgramInstaller" />
+			</Directory>
+		</Directory>
+	</Fragment>
+
+	<Fragment>
+		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+      
+      <Component Id="cmpXyzHandlerEXE"
+                 Guid="{C7F9458A-BFBF-4BB5-8DEC-3FD859B9C6EF}">
+        <File Id="xyzHandlerEXE"
+              Source="$(var.16_XyzHandler.TargetDir)16_XyzHandler.exe" />
+      </Component>
+      
+      <Component Id="cmpCartICO"
+                 Guid="{3B136AF8-BB3F-4B75-AC1B-F633DD79CE92}">
+        <File Id="cartICO"
+              Source="cart.ico" />
+      </Component>
+      
+      <Component Id="cmpXyzHandlerProgId"
+                 Guid="{1FA51F40-88BD-4C0C-8B07-B9BF200D338E}"
+                 KeyPath="yes">
+        <ProgId Id="xyzFile"
+                Description="XYZ Document"
+                Icon="cartICO">
+          <Extension Id="xyz" ContentType="text/plain">
+            <Verb Id="open"
+                  TargetFile="xyzHandlerEXE"
+                  Argument="&quot;%1&quot;" />
+          </Extension>
+        </ProgId>
+      </Component>
+		
+    </ComponentGroup>
+	</Fragment>
+</Wix>

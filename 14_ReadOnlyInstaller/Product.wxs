@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="*" Name="_14_ReadOnlyInstaller" Language="1033" Version="1.0.0.0" Manufacturer="_" UpgradeCode="be32a9af-cc0a-492a-8414-da27f8d0e0a8">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate />
+
+		<Feature Id="ProductFeature" Title="_14_ReadOnlyInstaller" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+		</Feature>
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="INSTALLFOLDER" Name="_14_ReadOnlyInstaller" />
+			</Directory>
+		</Directory>
+	</Fragment>
+
+	<Fragment>
+    <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+      <Component Id="cmpSampleTXT" Guid="{44BB2441-F98C-41F9-A1FE-EB732B626CF4}">
+        <File Source="Sample.txt" ReadOnly="yes" />
+      </Component>
+    </ComponentGroup>
+	</Fragment>
+</Wix>

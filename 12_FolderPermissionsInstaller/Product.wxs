@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+	<Product Id="*" Name="_12_FolderPermissionsInstaller" Language="1033" Version="1.0.0.0" Manufacturer="_" UpgradeCode="f7c19aff-030d-4c66-89e3-6ad2065ad04c">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate />
+
+		<Feature Id="ProductFeature" Title="_12_FolderPermissionsInstaller" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+		</Feature>
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="INSTALLFOLDER" Name="_12_FolderPermissionsInstaller" />
+			</Directory>
+		</Directory>
+	</Fragment>
+
+	<Fragment>
+		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+      <Component Id="cmpEmptyFolder" 
+                 Guid="{292A233A-9C0E-479F-B83B-509F841B32D3}">
+        <CreateFolder>
+          <util:PermissionEx User="Joe" GenericAll="yes"/>
+        </CreateFolder>
+      </Component>
+      <Component Id="cmpSampleTXT" Guid="{79972677-2109-471C-A8FE-58A255CE43E3}">
+        <File Source="Sample.txt" />
+      </Component>
+		</ComponentGroup>
+	</Fragment>
+</Wix>

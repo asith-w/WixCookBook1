@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+	<Product Id="*" Name="_15_FileShareInstaller" Language="1033" Version="1.0.0.0" Manufacturer="_" UpgradeCode="55d3ad7a-f0e3-426e-b6a5-60c8ddecd94c">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate />
+
+		<Feature Id="ProductFeature" Title="_15_FileShareInstaller" Level="1">
+			<ComponentGroupRef Id="SharedFilesComponents" />
+		</Feature>
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+        <Directory Id="INSTALLFOLDER" Name="_15_FileShareInstaller">
+          <Directory Id="FileShareDirectory" 
+                     Name="Shared Folder" />
+        </Directory>
+			</Directory>
+		</Directory>
+	</Fragment>
+
+	<Fragment>
+    <ComponentGroup Id="SharedFilesComponents" 
+                    Directory="FileShareDirectory">
+      <Component Id="cmpFileShare"
+                 Guid="{6974184A-1F4F-4FBB-ADA6-826E9C947A7C}"
+                 KeyPath="yes">
+        <util:FileShare Id="myFileShare"
+                        Description="Shares some stuff"
+                        Name="MyFileShare">
+          <util:FileSharePermission User="everyoneUser"
+                                    GenericAll="yes" />
+        </util:FileShare>
+        <util:User Id="everyoneUser"
+                   Name="Everyone"
+                   CreateUser="no"
+                   RemoveOnUninstall="no"/>
+      </Component>
+    </ComponentGroup>
+	</Fragment>
+</Wix>
