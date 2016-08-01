@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:iis="http://schemas.microsoft.com/wix/IIsExtension">
+	<Product Id="*" Name="_54_WebsiteInstaller" Language="1033" Version="1.0.0.0" Manufacturer="__" UpgradeCode="95317f0f-1612-4c84-86d1-f49db8767ec5">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate />
+
+		<Feature Id="ProductFeature" Title="_54_WebsiteInstaller" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+		</Feature>
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="INSTALLFOLDER" Name="_54_WebsiteInstaller" />
+			</Directory>
+		</Directory>
+	</Fragment>
+
+	<Fragment>
+		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+      <Component Id="cmpAppPool"
+                    Guid="{CBA59BDC-989C-4F77-B0F9-861AAB8E0DEB}"
+                    KeyPath="yes">
+        <iis:WebAppPool Id="MyAppPool"
+                        Name="MyWebsiteAppPool54"
+                        ManagedRuntimeVersion="v4.0"
+                        ManagedPipelineMode="integrated"
+                        Identity="applicationPoolIdentity" />
+      </Component>
+      <Component Id="cmpDefaultHTM" 
+                 Guid="{3032BC5D-D0DB-4007-B8C1-FFC919C4F5A5}">
+        <File Source="Default.htm" />
+        
+      </Component>
+      <Component Id="cmpMyWebsite"
+                 Guid="{95565B4A-C24A-4F64-9644-DE64973DE6B3}"
+                 KeyPath="yes">
+        <iis:WebSite Id="website_MyWebsite"
+                     Description="MyWebsite"
+                     Directory="INSTALLFOLDER"
+                     ConfigureIfExists="yes">
+        </iis:WebSite>
+      </Component>
+		</ComponentGroup>
+	</Fragment>
+</Wix>

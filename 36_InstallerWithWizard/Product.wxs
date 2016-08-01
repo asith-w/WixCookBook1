@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="*" Name="_36_InstallerWithWizard" Language="1033" Version="1.0.0.0" Manufacturer="__" UpgradeCode="18d06165-89b6-4ba5-b293-43400125526b">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate />
+
+		<Feature Id="ProductFeature" Title="_36_InstallerWithWizard" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+		</Feature>
+
+    <UIRef Id="WixUI_Minimal"/>
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="INSTALLFOLDER" Name="_36_InstallerWithWizard" />
+			</Directory>
+		</Directory>
+	</Fragment>
+
+	<Fragment>
+		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+      <Component Id="cmpSampleTXT"
+                 Guid="{2D1D0EC9-7DD9-4948-A175-59C9B2001B12}">
+        <File Source="Sample.txt" />
+      </Component>
+		</ComponentGroup>
+	</Fragment>
+</Wix>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Bundle Name="Bootstrapper1" Version="1.0.0.0" Manufacturer="__" UpgradeCode="a2c5aa79-a143-4b8b-9c69-c3f8c4da353c">
+		<BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.RtfLicense" />
+
+		<Chain>
+      <PackageGroupRef Id="NetFx45Redist"/>
+      <MsiPackage SourceFile="$(var.50_InstallerThatNeedsDotNet.TargetDir)50_InstallerThatNeedsDotNet.msi" />
+		</Chain>
+	</Bundle>
+</Wix>

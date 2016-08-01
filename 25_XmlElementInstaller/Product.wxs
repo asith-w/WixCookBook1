@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+	<Product Id="*" Name="_25_XmlElementInstaller" Language="1033" Version="1.0.0.0" Manufacturer="__" UpgradeCode="4cd8265c-e8e4-4754-b1da-cb170606be06">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate />
+
+		<Feature Id="ProductFeature" Title="_25_XmlElementInstaller" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+		</Feature>
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="INSTALLFOLDER" Name="_25_XmlElementInstaller" />
+			</Directory>
+		</Directory>
+	</Fragment>
+
+	<Fragment>
+		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+      <Component Id="cmpWebCONFIG"
+                 Guid="{64147F6A-BD21-414A-83DA-70855B615353}">
+        <File Source="Web.config" />
+      </Component>
+      <Component Id="cmpAddTracing"
+                 Guid="{07A2DF2B-B5AF-4277-9304-4D6CAEBF7BD5}"
+                 KeyPath="yes">
+        <util:XmlConfig Id="addTracing"
+                        File="[INSTALLFOLDER]Web.config"
+                        Action="create"
+                        On="install"
+                        Node="document"
+                        ElementPath="//configuration/system.web"
+                        Sequence="1">
+          <![CDATA[<trace enabled="true" />]]>
+        </util:XmlConfig>
+      </Component>
+		</ComponentGroup>
+	</Fragment>
+</Wix>

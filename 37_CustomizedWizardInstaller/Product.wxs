@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="*" Name="_37_CustomizedWizardInstaller" Language="1033" Version="1.0.0.0" Manufacturer="__" UpgradeCode="c55469e7-a305-4fbe-b10c-f36bee257099">
+    <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    <MediaTemplate />
+
+    <Feature Id="ProductFeature" Title="_37_CustomizedWizardInstaller" Level="1">
+      <ComponentGroupRef Id="ProductComponents" />
+    </Feature>
+
+    <UIRef Id="WixUI_Minimal"/>
+    <WixVariable Id="WixUIDialogBmp"
+                 Value="CustomBackground.jpg"/>
+    <WixVariable Id="WixUILicenseRtf"
+                 Value="CustomLicense.rtf"/>
+
+
+
+
+  </Product>
+
+  <Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="INSTALLFOLDER" Name="_37_CustomizedWizardInstaller" />
+      </Directory>
+    </Directory>
+  </Fragment>
+
+  <Fragment>
+    <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+      <Component Id="cmpSampleTXT"
+                 Guid="{A6F5F368-0FD3-4E75-AF3B-9FCB12AD1D86}">
+        <File Source="Sample.txt" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+</Wix>

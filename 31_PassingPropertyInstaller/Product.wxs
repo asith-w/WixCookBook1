@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="*" Name="_31_PassingPropertyInstaller" Language="1033" Version="1.0.0.0" Manufacturer="__" UpgradeCode="7e53a6f0-add1-4b01-ab4c-bc12d3b59b0c">
+    <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    <MediaTemplate />
+
+    <Feature Id="ProductFeature" Title="_31_PassingPropertyInstaller" Level="1">
+      <ComponentGroupRef Id="ProductComponents" />
+    </Feature>
+
+    <Binary Id="ReadPropertyCustomActionDLL"
+          SourceFile="$(var.31_ReadPropertyCustomAction.TargetDir)31_ReadPropertyCustomAction.CA.dll" />
+    <CustomAction Id="CA_ReadProperty"
+                  BinaryKey="ReadPropertyCustomActionDLL"
+                  DllEntry="ReadProperty"
+                  Execute="deferred"
+                  Return="check" />
+    <SetProperty Id="CA_ReadProperty"
+                  Value="USERNAME=[USERNAME]"
+                  Sequence="execute"
+                  Before="CA_ReadProperty" />
+    <InstallExecuteSequence>
+      <Custom Action="CA_ReadProperty" After="InstallInitialize" />
+    </InstallExecuteSequence>
+
+    <Property Id="USERNAME" Value="joe" />
+
+  </Product>
+
+  <Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="INSTALLFOLDER" Name="_31_PassingPropertyInstaller" />
+      </Directory>
+    </Directory>
+  </Fragment>
+
+  <Fragment>
+    <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+      <Component Id="cmpSampleTXT"
+                 Guid="{D362EAE1-1219-4E4D-AD5D-048DAB82CAFE}">
+        <File Source="Sample.txt" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+</Wix>

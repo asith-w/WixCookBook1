@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+	<Product Id="*" Name="_26_XmlAttributeInstaller_ConStr" Language="1033" Version="1.0.0.0" Manufacturer="__" UpgradeCode="2887a0e7-aa39-443d-ae12-e655ef76a1d3">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate />
+
+		<Feature Id="ProductFeature" Title="_26_XmlAttributeInstaller_ConStr" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+		</Feature>
+
+    
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="INSTALLFOLDER" Name="_26_XmlAttributeInstaller_ConStr" />
+			</Directory>
+		</Directory>
+	</Fragment>
+
+	<Fragment>
+    <Property Id="DB_INSTANCE" Value="prodserver\MYDATABASE" />
+		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+      
+      <Component Id="cmpWebCONFIG"
+                 Guid="{5812319F-D6B0-4AE8-A205-3E528D5006E5}">
+        <File Source="Web.config" />
+      </Component>
+
+      <Component Id="cmpUpdateSampleXML"
+                  Guid="{CE1F49BC-337A-44FA-9D41-7825564B5CC8}"
+                  KeyPath="yes">
+        <util:XmlConfig Id="setConnString"
+                        File="[INSTALLFOLDER]Web.config"
+                        Action="create"
+                        On="install"
+                        Node="value"
+                        Name="connectionString"
+                        Value="Data Source=[DB_INSTANCE]; Initial Catalog=Cus  tomers; Integrated Security=SSPI" 
+                        ElementPath="//configuration/connectionStrings/add[\[]@name='mydb'[\]]"
+                        Sequence="1" />
+      </Component>
+      
+      
+		</ComponentGroup>
+	</Fragment>
+</Wix>

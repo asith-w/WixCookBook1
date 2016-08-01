@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Bundle Name="_51_Bootstrapper2" Version="1.0.0.0" Manufacturer="__" UpgradeCode="817f9421-d313-440e-aae0-a05668c3e7b9">
+		<BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.RtfLicense" />
+
+		<Chain>
+      <MsiPackage InstallCondition="VersionNT64" 
+                  SourceFile="$(var.51_SixtyFourBitInstaller.TargetDir)51_SixtyFourBitInstaller.msi" />
+      <MsiPackage InstallCondition="NOT VersionNT64"
+                  SourceFile="$(var.51_ThirtyTwoBitInstaller.TargetDir)51_ThirtyTwoBitInstaller.msi" />
+		</Chain>
+	</Bundle>
+</Wix>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+  <Product Id="*" Name="_28_XmlElementExistsInstaller" Language="1033" Version="1.0.0.0" Manufacturer="__" UpgradeCode="6cc6b4a8-c690-4a19-8e95-d89a53fc9de4">
+    <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    <MediaTemplate />
+
+    <Feature Id="ProductFeature" Title="_28_XmlElementExistsInstaller" Level="1">
+      <ComponentGroupRef Id="ProductComponents" />
+    </Feature>
+  </Product>
+
+  <Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="INSTALLFOLDER" Name="_28_XmlElementExistsInstaller" />
+      </Directory>
+    </Directory>
+  </Fragment>
+
+  <Fragment>
+    <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+      <Component Id="cmpWebCONFIG"
+                 Guid="{1B527456-4367-4D3D-AAE4-7E5C22FB9192}">
+        <File Source="Web.config" />
+      </Component>
+
+      <Component Id="cmpAddSettingIfNotExist"
+                 Guid="{6E92CD4E-1173-4D60-B7EE-49613FC42632}"
+                 KeyPath="yes">
+        <util:XmlConfig Id="addSettingIfNotExist"
+                        File="[INSTALLFOLDER]Web.config"
+                        Action="create"
+                        On="install"
+                        Node="document"
+                        ElementPath="//configuration/appSettings"
+                        VerifyPath="//configuration/appSettings/add[\[]@key='UserSetting1'[\]]">
+          <![CDATA[<add key="UserSetting1" value="def" />]]>
+        </util:XmlConfig>
+      </Component>
+
+    </ComponentGroup>
+  </Fragment>
+</Wix>

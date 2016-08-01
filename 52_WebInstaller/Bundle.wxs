@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Bundle Name="_52_WebInstaller" Version="1.0.0.0" Manufacturer="__" UpgradeCode="427fa8ee-ac5b-49e5-b6d3-8755535eeba3">
+		<BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.RtfLicense" />
+
+		<Chain>
+      <MsiPackage Id="NODEJS"
+                  SourceFile="node-v6.3.1-x64.msi"
+                  DownloadUrl="https://nodejs.org/download/release/latest/node-v6.3.1-x64.msi"
+                  Compressed="no"
+                  ForcePerMachine="yes" />
+		</Chain>
+	</Bundle>
+</Wix>

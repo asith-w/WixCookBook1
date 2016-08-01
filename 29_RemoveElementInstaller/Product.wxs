@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+  <Product Id="*" Name="_29_RemoveElementInstaller" Language="1033" Version="1.0.0.0" Manufacturer="__" UpgradeCode="5f40cca0-fefc-4f86-b8dd-ffc2400febf4">
+    <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    <MediaTemplate />
+
+    <Feature Id="ProductFeature" Title="_29_RemoveElementInstaller" Level="1">
+      <ComponentGroupRef Id="ProductComponents" />
+    </Feature>
+  </Product>
+
+  <Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="INSTALLFOLDER" Name="_29_RemoveElementInstaller" />
+      </Directory>
+    </Directory>
+  </Fragment>
+
+  <Fragment>
+    <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+      <Component Id="cmpWebCONFIG"
+                 Guid="{1B527456-4367-4D3D-AAE4-7E5C22FB9192}">
+        <File Source="Web.config" />
+      </Component>
+      
+      <Component Id="cmpRemoveElement"
+                 Guid="{71A5AE3D-7D1A-4CA2-8E82-081CF3A1F9C8}"
+                 KeyPath="yes">
+        <util:XmlConfig Id="removeElement"
+                        File="[INSTALLFOLDER]Web.config"
+                        Action="delete"
+                        On="install"
+                        Node="element"
+                        ElementPath="//configuration/appSettings"
+                        VerifyPath="//configuration/appSettings/add[\[]@key='UserSetting2'[\]]"
+                        Sequence="1" />
+      </Component>
+      
+    </ComponentGroup>
+  </Fragment>
+</Wix>

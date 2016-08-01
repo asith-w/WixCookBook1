@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="*" Name="_48_LaunchConditionInstaller" Language="1033" Version="1.0.0.0" Manufacturer="__" UpgradeCode="e36e3f08-daf4-4699-a503-b7dabb40169c">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate />
+
+		<Feature Id="ProductFeature" Title="_48_LaunchConditionInstaller" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+		</Feature>
+
+    <PropertyRef Id="NETFRAMEWORK45"/>
+
+    <Condition Message="You must install Microsoft .NET Framework 4.5 or higher">
+      <![CDATA[Installed OR NETFRAMEWORK45]]>
+    </Condition>
+
+  </Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="INSTALLFOLDER" Name="_48_LaunchConditionInstaller" />
+			</Directory>
+		</Directory>
+	</Fragment>
+
+	<Fragment>
+		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+			 <Component Id="cmpProductComponent"
+                  Guid="F37D8C16-9423-401B-8CD6-C4F9658A83CB">
+         <File Source="Sample.txt"/>
+			 </Component> 
+		</ComponentGroup>
+	</Fragment>
+</Wix>

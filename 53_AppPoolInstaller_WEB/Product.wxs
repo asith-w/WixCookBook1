@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:iis="http://schemas.microsoft.com/wix/IIsExtension">
+	<Product Id="*" Name="_53_AppPoolInstaller_WEB" Language="1033" Version="1.0.0.0" Manufacturer="__" UpgradeCode="eb08b4c1-9c50-4576-821f-4819e610bdda">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate />
+
+		<Feature Id="ProductFeature" Title="_53_AppPoolInstaller_WEB" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+		</Feature>
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="INSTALLFOLDER" Name="_53_AppPoolInstaller_WEB" />
+			</Directory>
+		</Directory>
+	</Fragment>
+
+	<Fragment>
+		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+      <Component Id="cmpAppPool"
+                  Guid="{CBA59BDC-989C-4F77-B0F9-861AAB8E0DEB}"
+                  KeyPath="yes">
+        <iis:WebAppPool Id="MyAppPool"
+                        Name="MyWebsiteAppPool"
+                        ManagedRuntimeVersion="v4.0"
+                        ManagedPipelineMode="integrated"
+                        Identity="applicationPoolIdentity" />
+      </Component>
+		</ComponentGroup>
+	</Fragment>
+</Wix>
